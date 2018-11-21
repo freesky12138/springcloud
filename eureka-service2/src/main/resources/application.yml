@@ -1,0 +1,23 @@
+##两个注册中心相互注册必须满足：
+#1：eureka.client.serviceUrl.defaultZone配置项的地址，不能使用localhost，要使用service-center-1之类的域名，通过host映射到127.0.0.1；
+#2：spring.application.name或eureka.instance.appname必须一致；
+#3：相互注册要开启：
+#eureka.client.register-with-eureka=true
+#eureka.client.fetch-registry=true
+##
+
+spring:
+  application:
+    name: eureka-service
+
+
+server:
+  port: 8084
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://peer1:8083/eureka/

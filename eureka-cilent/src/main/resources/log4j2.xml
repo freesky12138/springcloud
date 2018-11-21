@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="ON">
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<ThresholdFilter level="info" />
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %p %c [%t] %m%n" />
+		</Console>
+	
+		<Console name="SqlConsole" target="SYSTEM_OUT">
+			<ThresholdFilter level="debug" />
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %c [%t] %m%n" />
+		</Console>
+
+		<RollingFile name="Rolling"
+			fileName="${log.path}/his-${sys:instance.flag}.log"
+			filePattern="${log.path}/his-${sys:instance.flag}.log.%d{yyyy-MM-dd}">
+			<ThresholdFilter level="info" />
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %c [%t] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"	interval="1" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+
+		<RollingFile name="RollingFileError"
+			fileName="${log.path}/his-${sys:instance.flag}-error.log"
+			filePattern="${log.path}/his-${sys:instance.flag}-error.log.%d{yyyy-MM-dd}">
+			<ThresholdFilter level="error" />
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %c [%t] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true" interval="1" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="RollingFileSql"
+			fileName="${log.path}/his-${sys:instance.flag}-sql.log"
+			filePattern="${log.path}/his-${sys:instance.flag}-sql.log.%d{yyyy-MM-dd}">
+			<ThresholdFilter level="debug" />
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %c [%t] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"	interval="1" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="RollingFileException"
+			fileName="${log.path}/his-${sys:instance.flag}-exception.log"
+			filePattern="${log.path}/his-${sys:instance.flag}-exception.log.%d{yyyy-MM-dd}">
+			<ThresholdFilter level="info" />
+			<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %c [%t] %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true"	interval="1" />
+			</Policies>
+		</RollingFile>
+	</appenders>
+	
+	<loggers>
+		<root level="debug">
+			<appender-ref ref="Console" />
+			<appender-ref ref="Rolling"/>
+			<appender-ref ref="RollingFileError"/>
+		</root>
+
+		<logger name="com.eyedsion.his.web.dao" level="debug" additivity="false">
+			<appender-ref ref="Rolling"/>
+			<appender-ref ref="SqlConsole" />
+			<appender-ref ref="RollingFileSql"/>
+		</logger>
+		<logger name="org.springframework.jdbc" level="debug" additivity="false">
+			<appender-ref ref="Rolling"/>
+			<appender-ref ref="RollingFileSql"/>
+		</logger>
+
+		<logger name="com.eyedsion.his.web.exception" level="info" additivity="false">
+			<appender-ref ref="Rolling"/>
+			<appender-ref ref="RollingFileException"/>
+		</logger>
+	
+	</loggers>
+	
+</configuration>
