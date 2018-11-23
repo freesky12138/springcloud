@@ -1,0 +1,18 @@
+server:
+  port: 8088
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8083/eureka/,http://peer2:8084/eureka/
+spring:
+  application:
+    name: eureka-zuul
+
+zuul:
+  routes:
+    client1api:
+      path: /cilent1/**
+      serviceId: eureka-client
+    client1ap2:
+      path: /cilent2/**
+      serviceId: eureka-client2

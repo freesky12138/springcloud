@@ -6,7 +6,7 @@ eureka:
       defaultZone: http://peer1:8083/eureka/,http://peer2:8084/eureka/
 spring:
   application:
-    name: eureka-client2
+    name: eureka-zuul1
 
 #开启熔断
 feign:
