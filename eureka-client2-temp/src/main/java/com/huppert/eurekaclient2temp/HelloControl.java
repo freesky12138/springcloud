@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloControl {
 
-    @RequestMapping(value = "/cilent2/test", method = { RequestMethod.POST })
+    @RequestMapping(value = "/test", method = { RequestMethod.POST })
     public String test(){
         return "eureka-client2-temp";
     }

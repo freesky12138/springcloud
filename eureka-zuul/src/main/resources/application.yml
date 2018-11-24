@@ -7,7 +7,7 @@ eureka:
 spring:
   application:
     name: eureka-zuul
-
+#/cilent1/**中  ** 代表eureka-client中的路径，如果要访问eureka-client，必须加前缀cilent1
 zuul:
   routes:
     client1api:

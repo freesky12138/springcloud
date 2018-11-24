@@ -3,6 +3,7 @@ package com.huppert.eurekacilent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,25 +29,25 @@ public class HelloControl {
 
     private static final Logger logger = LoggerFactory.getLogger(HelloControl.class);
 
-    @RequestMapping(value = "/cilent1/test", method = { RequestMethod.POST })
+    @RequestMapping(value = "/test", method = { RequestMethod.POST })
     public String test(){
         return schedualService.gethi();
     }
 
-    @RequestMapping(value = "/cilent1/resttemplate/test", method = { RequestMethod.POST })
+    @RequestMapping(value = "/resttemplate/test", method = { RequestMethod.POST })
     public String resttemplateTest(){
 
         //restTemplate.getForObject是get方法
         return restTemplate.postForObject("http://eureka-client2/test","{}",String.class);
     }
 
-    @RequestMapping(value = "/cilent1/interceptor/test", method = { RequestMethod.POST })
+    @RequestMapping(value = "/interceptor/test", method = { RequestMethod.POST })
     public String interceptorTest(){
         logger.info("logger");
         return schedualService.gethi();
     }
 
-    @RequestMapping(value = "/cilent1/test/error", method = { RequestMethod.POST })
+    @RequestMapping(value = "/test/error", method = { RequestMethod.POST })
     public String testError() throws Exception {
         throw new Exception();
     }

@@ -7,7 +7,12 @@ eureka:
 spring:
   application:
     name: eureka-client
-
+#链路追踪配置
+  sleuth:
+    sampler:
+      percentage: 1.0
+  zipkin:
+    base-url: http://localhost:8089
 #开启熔断
 feign:
   hystrix:
