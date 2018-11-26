@@ -1,0 +1,26 @@
+security:
+  user:
+    name: admin
+    password: 123456
+
+
+server:
+  port: 8090
+logging:
+  file: "logs/boot_admin_logs.log"
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8083/eureka/,http://peer2:8084/eureka/
+spring:
+  application:
+    name: server-admin
+management:
+  security:
+    enabled: false
+
+boot:
+  admin:
+    routes:
+      endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,fiyway,liguibase,heapdump,loggers,auditevents,hystrix.stream
+
